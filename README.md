@@ -36,5 +36,11 @@ Pushing to `main` automatically deploys via the included GitHub Actions workflow
 1. Push this repo to GitHub
 2. Go to **Settings → Pages** and set the source to **GitHub Actions**
 
-The site will be live at `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`.
+This repo is configured to deploy at `https://javvad.dev/bright-futures/`.
+
+If you rename the repo again or move the site to a different path, update the following:
+
+1. `VITE_BASE_PATH` in `.github/workflows/deploy.yml`
+2. Canonical and Open Graph URL tags in `index.html`
+3. URLs in `public/sitemap.xml` and `public/robots.txt`
 

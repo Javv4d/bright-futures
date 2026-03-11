@@ -33,9 +33,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # For a standard GitHub Pages project page the base path is /<repo-name>/
-          # If you use a custom domain or a user/org page (username.github.io), change to /
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          # This project is deployed under javvad.dev/bright-futures/
+          VITE_BASE_PATH: /bright-futures/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

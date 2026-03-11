@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap location — update YOUR_DOMAIN with your actual domain
-# Sitemap: https://YOUR_DOMAIN/sitemap.xml
+Sitemap: https://javvad.dev/bright-futures/sitemap.xml
