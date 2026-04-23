@@ -37,8 +37,8 @@ jobs:
       - name: Build (runs prebuild OG generation)
         run: npm run build
         env:
-          # Site is hosted at javvad.dev/bright-futures/
-          VITE_BASE_PATH: /bright-futures/
+          # Site is hosted at brightfuturesnonprofit.com/
+          VITE_BASE_PATH: /
 
       - name: Copy 404 fallback for SPA-style routing
         run: cp dist/index.html dist/404.html || true

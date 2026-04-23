@@ -96,7 +96,7 @@ Pushing to `main` automatically deploys via [`.github/workflows/deploy.yml`](.gi
 1. Push this repo to GitHub
 2. **Settings → Pages → Source: GitHub Actions**
 
-This repo is configured to deploy at **https://javvad.dev/bright-futures/**.
+This repo is configured to deploy at **[brightfuturesnonprofit.com](https://brightfuturesnonprofit.com/)**.
 
 If you rename the repo or move the site to a different path, update:
 

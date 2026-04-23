@@ -2,14 +2,14 @@
   "name": "Bright Futures",
   "short_name": "Bright Futures",
   "description": "Students helping students show up ready.",
-  "start_url": "/bright-futures/",
-  "scope": "/bright-futures/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#FEFAF1",
   "theme_color": "#F5A524",
   "icons": [
-    { "src": "/bright-futures/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "/bright-futures/favicon-32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "/bright-futures/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ]
 }

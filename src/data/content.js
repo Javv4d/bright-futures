@@ -4,7 +4,7 @@ export const org = {
   email: 'brightfuturessupplies@gmail.com',
   location: 'Dearborn, Michigan',
   school: 'Bryant Middle School',
-  url: 'https://javvad.dev/bright-futures/',
+  url: 'https://brightfuturesnonprofit.com/',
   description:
     'A student-run charity helping classmates at Bryant Middle School get the school supplies they need to succeed. 100% of donations go directly to students in need.',
   payments: {

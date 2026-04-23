@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://javvad.dev/bright-futures/sitemap.xml
+Sitemap: https://brightfuturesnonprofit.com/sitemap.xml
