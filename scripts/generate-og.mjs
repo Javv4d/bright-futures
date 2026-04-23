@@ -27,6 +27,9 @@ async function loadFont(url) {
 }
 
 async function buildOg() {
+  const favSvg = await readFile(resolve(pub, 'favicon.svg'), 'utf8');
+  const favDataUrl = `data:image/svg+xml;base64,${Buffer.from(favSvg).toString('base64')}`;
+
   const [fraunces700, inter500, inter700] = await Promise.all([
     loadFont('https://github.com/undefinedbehavior/fraunces/raw/main/fonts/static/Fraunces-SemiBold.ttf'),
     loadFont('https://github.com/rsms/inter/raw/master/docs/font-files/Inter-Medium.woff'),
@@ -50,8 +53,10 @@ async function buildOg() {
           height: '630px',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
-          padding: '64px 72px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '80px',
+          gap: '48px',
           background: `linear-gradient(135deg, ${PAPER} 0%, ${PAPER_DEEP} 100%)`,
           position: 'relative',
           fontFamily: 'Inter',
@@ -63,13 +68,13 @@ async function buildOg() {
             props: {
               style: {
                 position: 'absolute',
-                top: '-120px',
-                right: '-120px',
-                width: '520px',
-                height: '520px',
+                top: '-160px',
+                right: '-160px',
+                width: '640px',
+                height: '640px',
                 borderRadius: '9999px',
-                background: `${AMBER}`,
-                opacity: 0.18,
+                background: AMBER,
+                opacity: 0.22,
                 filter: 'blur(60px)',
               },
             },
@@ -77,30 +82,43 @@ async function buildOg() {
           {
             type: 'div',
             props: {
-              style: { display: 'flex', alignItems: 'center', gap: '14px' },
+              style: {
+                position: 'absolute',
+                bottom: '-200px',
+                left: '-200px',
+                width: '640px',
+                height: '640px',
+                borderRadius: '9999px',
+                background: INK,
+                opacity: 0.06,
+                filter: 'blur(70px)',
+              },
+            },
+          },
+          {
+            type: 'div',
+            props: {
+              style: { display: 'flex', alignItems: 'center', gap: '28px' },
               children: [
                 {
-                  type: 'div',
+                  type: 'img',
                   props: {
-                    style: {
-                      display: 'flex',
-                      width: '48px',
-                      height: '48px',
-                      borderRadius: '9999px',
-                      background: AMBER,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: INK,
-                      fontWeight: 700,
-                      fontSize: '22px',
-                    },
-                    children: '★',
+                    src: favDataUrl,
+                    width: 140,
+                    height: 140,
+                    style: { borderRadius: '32px' },
                   },
                 },
                 {
                   type: 'div',
                   props: {
-                    style: { fontFamily: 'Fraunces', fontSize: '30px', fontWeight: 600, letterSpacing: '-0.02em' },
+                    style: {
+                      fontFamily: 'Fraunces',
+                      fontSize: '124px',
+                      fontWeight: 600,
+                      letterSpacing: '-0.035em',
+                      lineHeight: 1,
+                    },
                     children: 'BrightFutures',
                   },
                 },
@@ -110,49 +128,15 @@ async function buildOg() {
           {
             type: 'div',
             props: {
-              style: { display: 'flex', flexDirection: 'column', gap: '24px' },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontFamily: 'Fraunces',
-                      fontSize: '78px',
-                      fontWeight: 600,
-                      lineHeight: 1.04,
-                      letterSpacing: '-0.025em',
-                      maxWidth: '1060px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                    },
-                    children: [
-                      { type: 'span', props: { style: { display: 'flex' }, children: 'Every kid shows up.' } },
-                      {
-                        type: 'span',
-                        props: {
-                          style: { display: 'flex' },
-                          children: 'We help them show up',
-                        },
-                      },
-                      {
-                        type: 'span',
-                        props: {
-                          style: { display: 'flex', color: AMBER },
-                          children: 'ready.',
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: { fontSize: '26px', color: '#1e293b', maxWidth: '840px', fontWeight: 500 },
-                    children:
-                      'A student-run charity helping classmates at Bryant Middle School get the supplies they need to succeed.',
-                  },
-                },
-              ],
+              style: {
+                fontSize: '38px',
+                fontWeight: 700,
+                letterSpacing: '0.32em',
+                textTransform: 'uppercase',
+                color: INK,
+                opacity: 0.75,
+              },
+              children: 'Students helping Students',
             },
           },
           {
@@ -161,35 +145,28 @@ async function buildOg() {
               style: {
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
-                borderTop: `1px solid ${INK}22`,
-                paddingTop: '24px',
+                background: INK,
+                color: PAPER,
+                padding: '24px 44px',
+                borderRadius: '9999px',
+                fontSize: '36px',
+                fontWeight: 700,
+                gap: '18px',
+                marginTop: '8px',
               },
               children: [
                 {
                   type: 'div',
                   props: {
-                    style: { fontSize: '20px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: INK },
-                    children: 'Dearborn · Michigan',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
                     style: {
-                      display: 'flex',
-                      alignItems: 'center',
-                      background: INK,
-                      color: PAPER,
-                      padding: '14px 24px',
+                      width: '16px',
+                      height: '16px',
                       borderRadius: '9999px',
-                      fontSize: '22px',
-                      fontWeight: 700,
-                      gap: '10px',
+                      background: AMBER,
                     },
-                    children: ['♥', '  100% direct to students'],
                   },
                 },
+                '100% direct to students',
               ],
             },
           },

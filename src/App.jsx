@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Nav } from '@/components/Nav';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import { Hero } from '@/components/Hero';
@@ -8,6 +9,26 @@ import { Donate } from '@/components/Donate';
 import { Footer } from '@/components/Footer';
 
 export default function App() {
+  useEffect(() => {
+    const onClick = (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#') return;
+      const id = href.slice(1);
+      const target = id === 'top' ? document.body : document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      if (id === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
     <>
       <ScrollProgress />
