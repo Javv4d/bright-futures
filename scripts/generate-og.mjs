@@ -119,7 +119,7 @@ async function buildOg() {
                       letterSpacing: '-0.035em',
                       lineHeight: 1,
                     },
-                    children: 'BrightFutures',
+                    children: 'Bright Futures',
                   },
                 },
               ],

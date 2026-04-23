@@ -1,4 +1,4 @@
-# BrightFutures — Ground-Up Rebuild Design
+# Bright Futures — Ground-Up Rebuild Design
 
 **Date**: 2026-04-23
 **Status**: Approved (user granted full creative control)

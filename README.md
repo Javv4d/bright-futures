@@ -1,4 +1,4 @@
-# BrightFutures
+# Bright Futures
 
 A student-run charity website helping classmates at Bryant Middle School (Dearborn, MI) get the school supplies they need to succeed. 100% of donations go directly to students.
 
@@ -6,7 +6,7 @@ Built with React 18, Vite 6, Tailwind CSS, and Framer Motion.
 
 ## About
 
-BrightFutures connects donors directly with students in need — no middlemen, no overhead. Every dollar goes straight to kids who show up to school without the basics: pencils, notebooks, or learning materials.
+Bright Futures connects donors directly with students in need — no middlemen, no overhead. Every dollar goes straight to kids who show up to school without the basics: pencils, notebooks, or learning materials.
 
 ## Stack
 

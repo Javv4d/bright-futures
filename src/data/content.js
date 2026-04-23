@@ -1,5 +1,5 @@
 export const org = {
-  name: 'BrightFutures',
+  name: 'Bright Futures',
   tagline: 'Students Helping Students',
   email: 'brightfuturessupplies@gmail.com',
   location: 'Dearborn, Michigan',
