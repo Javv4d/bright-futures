@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn';
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -21,6 +22,37 @@ export function Nav() {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    const ids = nav.map((n) => n.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    if (sections.length === 0) return;
+
+    const visible = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+          else visible.delete(e.target.id);
+        });
+        if (visible.size === 0) {
+          setActiveId('');
+          return;
+        }
+        const [topId] = [...visible.entries()].sort((a, b) => b[1] - a[1])[0];
+        setActiveId(topId);
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  const navItems = nav.filter((item) => item.href !== '#donate');
+  const donateActive = activeId === 'donate';
 
   return (
     <>
@@ -48,19 +80,37 @@ export function Nav() {
           </a>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {nav.filter((item) => item.href !== '#donate').map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="group relative text-sm font-medium text-ink/70 transition-colors hover:text-ink"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-amber transition-transform duration-300 group-hover:scale-x-100" />
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeId === item.href.slice(1);
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={cn(
+                    'group relative text-sm font-medium transition-colors',
+                    isActive ? 'text-ink' : 'text-ink/60 hover:text-ink',
+                  )}
+                >
+                  {item.label}
+                  <span
+                    className={cn(
+                      'absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-amber transition-transform duration-300',
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                    )}
+                  />
+                </a>
+              );
+            })}
             <a
               href="#donate"
-              className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper shadow-soft transition-all duration-300 hover:bg-ink-soft hover:shadow-lift"
+              aria-current={donateActive ? 'true' : undefined}
+              className={cn(
+                'rounded-full px-5 py-2.5 text-sm font-semibold shadow-soft transition-all duration-300 hover:shadow-lift',
+                donateActive
+                  ? 'bg-amber text-ink ring-2 ring-amber ring-offset-2 ring-offset-paper'
+                  : 'bg-ink text-paper hover:bg-ink-soft',
+              )}
             >
               Donate
             </a>
@@ -88,26 +138,45 @@ export function Nav() {
             className="fixed inset-0 z-40 bg-paper md:hidden"
           >
             <div className="flex h-full flex-col items-center justify-center gap-6 px-6">
-              {nav.filter((item) => item.href !== '#donate').map((item, i) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 + i * 0.06, duration: 0.45 }}
-                  className="font-display text-4xl font-semibold tracking-tight text-ink"
-                >
-                  {item.label}
-                </motion.a>
-              ))}
+              {navItems.map((item, i) => {
+                const isActive = activeId === item.href.slice(1);
+                return (
+                  <motion.a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? 'true' : undefined}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.08 + i * 0.06, duration: 0.45 }}
+                    className={cn(
+                      'relative font-display text-4xl font-semibold tracking-tight transition-colors',
+                      isActive ? 'text-amber' : 'text-ink',
+                    )}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="mobile-active-dot"
+                        className="absolute -left-5 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-amber"
+                      />
+                    )}
+                    {item.label}
+                  </motion.a>
+                );
+              })}
               <motion.a
                 href="#donate"
                 onClick={() => setOpen(false)}
+                aria-current={donateActive ? 'true' : undefined}
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 + (nav.length - 1) * 0.06, duration: 0.45 }}
-                className="mt-4 rounded-full bg-ink px-8 py-4 text-base font-semibold text-paper shadow-lift"
+                transition={{ delay: 0.08 + navItems.length * 0.06, duration: 0.45 }}
+                className={cn(
+                  'mt-4 rounded-full px-8 py-4 text-base font-semibold shadow-lift transition-colors',
+                  donateActive
+                    ? 'bg-amber text-ink ring-2 ring-amber ring-offset-2 ring-offset-paper'
+                    : 'bg-ink text-paper',
+                )}
               >
                 Donate
               </motion.a>
